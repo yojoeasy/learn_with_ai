@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Storage Practice</title>
+</head>
+
+<body style="font-family: sans-serif; padding: 20px;">
+
+    <h1>Score Saver!</h1>
+    <h2 id="scoreDisplay">Current Score: 0</h2>
+
+    <button id="addBtn">+ 1 Point</button>
+    <button id="saveBtn">Save Game</button>
+    <button id="clearBtn">Clear Save</button>
+
+    <script>
+        let score = 0;
+        const display = document.getElementById("scoreDisplay");
+
+        // 1. On page load, CHECK if we have a saved game!
+        const savedScoreText = localStorage.getItem("gameScore");
+        if (savedScoreText !== null) {
+            // It was a string, so we convert it to a Number
+            score = Number(savedScoreText);
+            display.innerText = "Current Score: " + score;
+            console.log("Restored saved game!");
+        }
+
+        // 2. Add points button
+        document.getElementById("addBtn").addEventListener("click", () => {
+            score++;
+            display.innerText = "Current Score: " + score;
+        });
+
+        // 3. Save game button
+        document.getElementById("saveBtn").addEventListener("click", () => {
+            // Write to the hard drive
+            localStorage.setItem("gameScore", String(score));
+            alert("Game saved permanently!");
+        });
+
+        // 4. Wipe hard drive
+        document.getElementById("clearBtn").addEventListener("click", () => {
+            localStorage.removeItem("gameScore");
+            score = 0;
+            display.innerText = "Current Score: 0";
+            alert("Save wiped! Refresh page to test.");
+        });
+    </script>
+</body>
+
+</html>

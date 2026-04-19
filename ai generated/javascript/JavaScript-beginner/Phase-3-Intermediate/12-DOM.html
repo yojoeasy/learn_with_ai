@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM Practice</title>
+    <style>
+        .box { padding: 20px; border: 2px solid black; margin-top: 20px; text-align: center; }
+        .dark-mode { background-color: #333; color: white; }
+    </style>
+</head>
+<body>
+
+    <h1 id="title">Welcome to the DOM!</h1>
+    <p>This paragraph is just chilling here.</p>
+    
+    <button id="colorBtn">Change Color</button>
+    <button id="themeBtn">Toggle Dark Mode</button>
+    
+    <div id="output" class="box">Result will appear here</div>
+
+    <script>
+        // 1. Grab elements from the HTML
+        const title = document.getElementById("title");
+        const colorBtn = document.getElementById("colorBtn");
+        const themeBtn = document.getElementById("themeBtn");
+        const outputBox = document.getElementById("output");
+
+        // 2. Add an Event Listener for clicks
+        colorBtn.addEventListener("click", () => {
+            title.style.color = "red";
+            outputBox.innerText = "You clicked the color button!";
+        });
+
+        // 3. Toggle a CSS class!
+        themeBtn.addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+            outputBox.innerText = "Toggled theme!";
+        });
+    </script>
+</body>
+</html>

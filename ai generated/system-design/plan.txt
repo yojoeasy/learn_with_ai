@@ -1,0 +1,47 @@
+Act as a senior system architect with 20 years of experience building scalable systems.
+
+Help me design a [SYSTEM NAME].
+
+Requirements:
+- Expected users: [number]
+- Peak traffic: [RPS]
+- Data size: [approx]
+- Availability requirement: [99.9% etc]
+- Budget constraints: [low / medium / high]
+- Tech preference: [MERN / Node.js / AWS / etc]
+
+Explain:
+1. High-level architecture
+2. Database design
+3. API structure
+4. Scaling strategy
+5. Caching strategy
+6. Security considerations
+7. Bottlenecks and tradeoffs
+
+Explain step by step like I am preparing for a system design interview.
+
+
+Architecture Learning Roadmap (Use GPT Like This)
+
+Ask GPT to design systems in this order:
+
+URL Shortener
+
+Chat Application
+
+E-commerce Platform
+
+Payment System
+
+Notification System
+
+File Storage System
+
+Social Media Feed
+
+Ride Sharing App
+
+Video Streaming Platform
+
+Distributed Logging System
