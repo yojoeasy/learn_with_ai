@@ -1,0 +1,107 @@
+1. Array Basics (Warm-up)
+
+Focus: indexing, traversal, basic operations
+
+Questions:
+
+Find the sum of all elements in an array
+Find the maximum and minimum element
+Count even and odd numbers
+Reverse an array (without using .reverse())
+Check if an array is sorted or not
+Find the second largest element
+🔹 2. Searching
+
+Focus: linear & binary thinking
+
+Questions:
+
+Implement Linear Search
+Implement Binary Search (array must be sorted)
+Find first occurrence of an element
+Find last occurrence
+Count how many times an element appears
+
+👉 Try optimizing where possible.
+
+🔹 3. Two Pointer Technique
+
+Very important for interviews
+
+Questions:
+
+Reverse array using two pointers
+Check if array is a palindrome
+Move all zeros to end
+Remove duplicates from sorted array
+Pair with given sum (Two Sum - sorted array)
+🔹 4. Sliding Window
+
+Used for subarray problems
+
+Questions:
+
+Maximum sum of subarray of size k
+Find subarray with given sum
+Longest subarray with sum ≤ k
+Maximum average subarray
+Count subarrays of size k with sum > X
+🔹 5. Prefix Sum
+
+Optimization technique
+
+Questions:
+
+Build prefix sum array
+Find sum of range [L, R]
+Find equilibrium index
+Count subarrays with given sum
+Product of array except self
+🔹 6. Sorting Basics (Important)
+
+You should know logic even if JS has .sort()
+
+Questions:
+
+Implement Bubble Sort
+Implement Selection Sort
+Implement Insertion Sort
+Sort array of 0s, 1s, 2s (Dutch National Flag)
+Merge two sorted arrays
+🔹 7. Kadane’s Algorithm (Must Know 🔥)
+
+Questions:
+
+Maximum subarray sum
+Print the subarray with max sum
+Maximum circular subarray sum
+🔹 8. Advanced Array Problems
+
+Now you're entering interview level
+
+Questions:
+
+Two Sum (unsorted array using hashmap)
+Majority element (> n/2 times)
+Find missing number (1 to n)
+Find duplicate element
+Merge overlapping intervals
+Container with most water
+Trapping rain water
+🔹 9. Matrix (2D Array)
+
+Extension of arrays
+
+Questions:
+
+Traverse matrix
+Spiral order traversal
+Transpose matrix
+Rotate matrix by 90°
+Search in 2D matrix
+🔹 10. Practice Strategy
+
+Start with easy → medium → hard
+Implement algorithms yourself first (then use library)
+Track which pattern you solved
+Retry problems after some time to check memory
