@@ -1,0 +1,197 @@
+1. Types of Linked Lists (with JS)
+1. Singly Linked List
+
+Each node points to the next node.
+
+Structure:
+[10 | next] -> [20 | next] -> [30 | null]
+JavaScript Example:
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+class SinglyLinkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  append(value) {
+    let newNode = new Node(value);
+
+    if (!this.head) {
+      this.head = newNode;
+      return;
+    }
+
+    let current = this.head;
+    while (current.next) {
+      current = current.next;
+    }
+
+    current.next = newNode;
+  }
+}
+Explanation:
+Each node has:
+value
+next pointer
+Traversal is only forward
+2. Doubly Linked List
+
+Each node has two pointers: prev and next
+
+Structure:
+null <- [10] <-> [20] <-> [30] -> null
+JavaScript Example:
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+    this.prev = null;
+  }
+}
+
+class DoublyLinkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  append(value) {
+    let newNode = new Node(value);
+
+    if (!this.head) {
+      this.head = newNode;
+      return;
+    }
+
+    let current = this.head;
+    while (current.next) {
+      current = current.next;
+    }
+
+    current.next = newNode;
+    newNode.prev = current;
+  }
+}
+Explanation:
+Can traverse forward + backward
+Extra memory for prev
+3. Circular Linked List
+
+Last node points back to head.
+
+Structure:
+[10] -> [20] -> [30]
+  ^                 |
+  |_________________|
+JavaScript Example:
+class CircularLinkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  append(value) {
+    let newNode = new Node(value);
+
+    if (!this.head) {
+      this.head = newNode;
+      newNode.next = this.head;
+      return;
+    }
+
+    let current = this.head;
+    while (current.next !== this.head) {
+      current = current.next;
+    }
+
+    current.next = newNode;
+    newNode.next = this.head;
+  }
+}
+Explanation:
+No null at end
+Useful in round-robin problems
+2. Topic-wise Questions (Step by Step)
+🔹 Level 1: Basics
+
+Start here.
+
+Create a Linked List class
+Insert at beginning
+Insert at end
+Print all nodes
+Find length of list
+🔹 Level 2: Intermediate
+
+Focus on pointer handling.
+
+Insert at specific position
+Delete first node
+Delete last node
+Delete node by value
+Search element
+🔹 Level 3: Important Patterns (INTERVIEW LEVEL)
+Reverse a linked list
+👉 (VERY IMPORTANT)
+Find middle of linked list
+👉 Use slow & fast pointer
+Detect loop (cycle)
+👉 Floyd’s Cycle Algorithm
+Remove duplicates from sorted list
+Find nth node from end
+🔹 Level 4: Advanced
+Merge two sorted linked lists
+Check if linked list is palindrome
+Rotate linked list
+Reverse in groups of k
+Flatten a linked list
+3. How to Think (VERY IMPORTANT 🔥)
+
+When solving Linked List problems, follow this mindset:
+
+Step 1: Draw it ✍️
+
+Example:
+
+1 -> 2 -> 3 -> 4 -> null
+Step 2: Track pointers
+
+Use variables like:
+
+let current = head;
+let prev = null;
+let next = null;
+Step 3: Ask key questions
+What happens at head?
+What happens at last node?
+What if list is empty?
+Step 4: Break into steps
+Example: Reverse Linked List
+
+Think like this:
+
+Store next node
+Reverse current pointer
+Move forward
+function reverse(head) {
+  let prev = null;
+  let current = head;
+
+  while (current) {
+    let next = current.next;
+    current.next = prev;
+    prev = current;
+    current = next;
+  }
+
+  return prev;
+}
+Step 5: Dry run 🧠
+
+Always simulate:
+
+prev = null
+current = 1 -> 2 -> 3

@@ -99,9 +99,805 @@ Spiral order traversal
 Transpose matrix
 Rotate matrix by 90°
 Search in 2D matrix
-🔹 10. Practice Strategy
 
-Start with easy → medium → hard
-Implement algorithms yourself first (then use library)
-Track which pattern you solved
-Retry problems after some time to check memory
+10. Hashing (Map/Set)
+
+Used for optimization
+
+Questions:
+
+Find all duplicates
+First non-repeating element
+Longest consecutive sequence
+Subarray with zero sum
+11. Bit Manipulation (Tricky)
+
+Advanced but useful
+
+Questions:
+
+Find single number (every other appears twice)
+Find two non-repeating elements
+12. Recursion on Arrays
+
+Understand recursive thinking
+
+Questions:
+
+Sum of array using recursion
+Check if array is sorted using recursion
+Binary search using recursion
+
+==========================================================
+DSA - ARRAY COMPLETE GUIDE (With Examples & Solutions)
+==========================================================
+
+ARRAY TYPES:
+1. One-Dimensional Array (1D)
+2. Multi-Dimensional Array (2D/3D)
+3. Sparse Array
+4. Dynamic Array
+5. Associative Array (Object/Map)
+
+----------------------------------------------------------
+TYPE 1: ONE-DIMENSIONAL ARRAY (1D)
+----------------------------------------------------------
+Definition: Linear list of elements, same type, indexed from 0.
+
+Example:
+  let arr = [10, 20, 30, 40, 50];
+  console.log(arr[0]); // 10
+  console.log(arr.length); // 5
+
+----------------------------------------------------------
+TYPE 2: TWO-DIMENSIONAL ARRAY (2D Matrix)
+----------------------------------------------------------
+Definition: Array of arrays, like a table/grid.
+
+Example:
+  let matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+  ];
+  console.log(matrix[1][2]); // 6
+
+----------------------------------------------------------
+TYPE 3: SPARSE ARRAY
+----------------------------------------------------------
+Definition: Array where most elements are 0 or empty.
+
+Example:
+  let sparse = [];
+  sparse[0] = 1;
+  sparse[100] = 5;
+  console.log(sparse.length); // 101
+
+----------------------------------------------------------
+TYPE 4: DYNAMIC ARRAY
+----------------------------------------------------------
+Definition: Array that grows/shrinks at runtime.
+
+Example:
+  let dyn = [];
+  dyn.push(10);
+  dyn.push(20);
+  dyn.pop();
+  console.log(dyn); // [10]
+
+----------------------------------------------------------
+TYPE 5: ASSOCIATIVE ARRAY (Map/Object)
+----------------------------------------------------------
+Definition: Key-value pairs instead of numeric index.
+
+Example:
+  let map = { name: 'Alice', age: 25 };
+  console.log(map['name']); // Alice
+
+
+==========================================================
+SECTION 1: ARRAY BASICS (Warm-up)
+==========================================================
+
+Q1. Find the sum of all elements
+-------------------------------
+let arr = [1, 2, 3, 4, 5];
+let sum = 0;
+for (let i = 0; i < arr.length; i++) sum += arr[i];
+console.log(sum); // 15
+
+Q2. Find Maximum and Minimum
+-------------------------------
+let arr = [3, 1, 9, 2, 7];
+let max = arr[0], min = arr[0];
+for (let x of arr) {
+  if (x > max) max = x;
+  if (x < min) min = x;
+}
+console.log(max, min); // 9 1
+
+Q3. Count Even and Odd
+-------------------------------
+let arr = [1, 2, 3, 4, 5, 6];
+let even = 0, odd = 0;
+for (let x of arr) x % 2 === 0 ? even++ : odd++;
+console.log('Even:', even, 'Odd:', odd); // Even:3 Odd:3
+
+Q4. Reverse an Array (without .reverse())
+------------------------------------------
+let arr = [1, 2, 3, 4, 5];
+let left = 0, right = arr.length - 1;
+while (left < right) {
+  [arr[left], arr[right]] = [arr[right], arr[left]];
+  left++; right--;
+}
+console.log(arr); // [5,4,3,2,1]
+
+Q5. Check if Array is Sorted
+-------------------------------
+let arr = [1, 2, 3, 4, 5];
+let sorted = true;
+for (let i = 0; i < arr.length - 1; i++) {
+  if (arr[i] > arr[i+1]) { sorted = false; break; }
+}
+console.log(sorted); // true
+
+Q6. Find Second Largest Element
+---------------------------------
+let arr = [3, 1, 9, 2, 7];
+let first = -Infinity, second = -Infinity;
+for (let x of arr) {
+  if (x > first) { second = first; first = x; }
+  else if (x > second && x !== first) second = x;
+}
+console.log(second); // 7
+
+
+==========================================================
+SECTION 2: SEARCHING
+==========================================================
+
+Q1. Linear Search
+------------------
+function linearSearch(arr, target) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === target) return i;
+  }
+  return -1;
+}
+console.log(linearSearch([4, 2, 7, 1], 7)); // 2
+
+Q2. Binary Search (sorted array)
+----------------------------------
+function binarySearch(arr, target) {
+  let left = 0, right = arr.length - 1;
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    if (arr[mid] === target) return mid;
+    else if (arr[mid] < target) left = mid + 1;
+    else right = mid - 1;
+  }
+  return -1;
+}
+console.log(binarySearch([1,3,5,7,9], 5)); // 2
+
+Q3. First Occurrence
+----------------------
+function firstOccurrence(arr, target) {
+  for (let i = 0; i < arr.length; i++)
+    if (arr[i] === target) return i;
+  return -1;
+}
+console.log(firstOccurrence([2,3,3,3,4], 3)); // 1
+
+Q4. Last Occurrence
+---------------------
+function lastOccurrence(arr, target) {
+  for (let i = arr.length - 1; i >= 0; i--)
+    if (arr[i] === target) return i;
+  return -1;
+}
+console.log(lastOccurrence([2,3,3,3,4], 3)); // 3
+
+Q5. Count Occurrences
+-----------------------
+function countOccurrence(arr, target) {
+  return arr.filter(x => x === target).length;
+}
+console.log(countOccurrence([2,3,3,3,4], 3)); // 3
+
+
+==========================================================
+SECTION 3: TWO POINTER TECHNIQUE
+==========================================================
+
+Q1. Reverse Array using Two Pointers
+--------------------------------------
+let arr = [1,2,3,4,5];
+let l = 0, r = arr.length - 1;
+while (l < r) { [arr[l],arr[r]] = [arr[r],arr[l]]; l++; r--; }
+console.log(arr); // [5,4,3,2,1]
+
+Q2. Check Palindrome Array
+----------------------------
+function isPalindrome(arr) {
+  let l = 0, r = arr.length - 1;
+  while (l < r) {
+    if (arr[l] !== arr[r]) return false;
+    l++; r--;
+  }
+  return true;
+}
+console.log(isPalindrome([1,2,3,2,1])); // true
+
+Q3. Move All Zeros to End
+---------------------------
+function moveZeros(arr) {
+  let pos = 0;
+  for (let i = 0; i < arr.length; i++)
+    if (arr[i] !== 0) arr[pos++] = arr[i];
+  while (pos < arr.length) arr[pos++] = 0;
+  return arr;
+}
+console.log(moveZeros([0,1,0,3,12])); // [1,3,12,0,0]
+
+Q4. Remove Duplicates from Sorted Array
+-----------------------------------------
+function removeDuplicates(arr) {
+  if (!arr.length) return 0;
+  let pos = 1;
+  for (let i = 1; i < arr.length; i++)
+    if (arr[i] !== arr[i-1]) arr[pos++] = arr[i];
+  return arr.slice(0, pos);
+}
+console.log(removeDuplicates([1,1,2,2,3,4])); // [1,2,3,4]
+
+Q5. Pair with Given Sum (sorted)
+----------------------------------
+function pairSum(arr, target) {
+  let l = 0, r = arr.length - 1;
+  while (l < r) {
+    let s = arr[l] + arr[r];
+    if (s === target) return [arr[l], arr[r]];
+    else if (s < target) l++;
+    else r--;
+  }
+  return [];
+}
+console.log(pairSum([1,2,3,4,6], 6)); // [2,4]
+
+
+==========================================================
+SECTION 4: SLIDING WINDOW
+==========================================================
+
+Q1. Max Sum Subarray of Size k
+--------------------------------
+function maxSumSubarray(arr, k) {
+  let sum = 0, maxSum = 0;
+  for (let i = 0; i < k; i++) sum += arr[i];
+  maxSum = sum;
+  for (let i = k; i < arr.length; i++) {
+    sum += arr[i] - arr[i - k];
+    maxSum = Math.max(maxSum, sum);
+  }
+  return maxSum;
+}
+console.log(maxSumSubarray([2,1,5,1,3,2], 3)); // 9
+
+Q2. Find Subarray with Given Sum (positive nums)
+--------------------------------------------------
+function subarrayWithSum(arr, target) {
+  let sum = 0, start = 0;
+  for (let end = 0; end < arr.length; end++) {
+    sum += arr[end];
+    while (sum > target) sum -= arr[start++];
+    if (sum === target) return [start, end];
+  }
+  return [];
+}
+console.log(subarrayWithSum([1,2,3,7,5], 12)); // [1,3]
+
+Q3. Longest Subarray with Sum <= k
+-------------------------------------
+function longestSubarray(arr, k) {
+  let sum = 0, start = 0, maxLen = 0;
+  for (let end = 0; end < arr.length; end++) {
+    sum += arr[end];
+    while (sum > k) sum -= arr[start++];
+    maxLen = Math.max(maxLen, end - start + 1);
+  }
+  return maxLen;
+}
+console.log(longestSubarray([3,1,2,1,4,1,3,2], 7)); // 4
+
+Q4. Maximum Average Subarray
+------------------------------
+function maxAvgSubarray(arr, k) {
+  let sum = arr.slice(0, k).reduce((a, b) => a + b, 0);
+  let maxSum = sum;
+  for (let i = k; i < arr.length; i++) {
+    sum += arr[i] - arr[i - k];
+    maxSum = Math.max(maxSum, sum);
+  }
+  return maxSum / k;
+}
+console.log(maxAvgSubarray([1,12,-5,-6,50,3], 4)); // 12.75
+
+Q5. Count Subarrays of size k with sum > X
+--------------------------------------------
+function countSubarrays(arr, k, x) {
+  let sum = 0, count = 0;
+  for (let i = 0; i < k; i++) sum += arr[i];
+  if (sum > x) count++;
+  for (let i = k; i < arr.length; i++) {
+    sum += arr[i] - arr[i - k];
+    if (sum > x) count++;
+  }
+  return count;
+}
+console.log(countSubarrays([2,3,4,5,1], 2, 5)); // 3
+
+
+==========================================================
+SECTION 5: PREFIX SUM
+==========================================================
+
+Q1. Build Prefix Sum Array
+----------------------------
+let arr = [1,2,3,4,5];
+let prefix = [arr[0]];
+for (let i = 1; i < arr.length; i++)
+  prefix[i] = prefix[i-1] + arr[i];
+console.log(prefix); // [1,3,6,10,15]
+
+Q2. Sum of Range [L, R]
+-------------------------
+function rangeSum(prefix, l, r) {
+  return l === 0 ? prefix[r] : prefix[r] - prefix[l-1];
+}
+let arr=[1,2,3,4,5]; let p=[1,3,6,10,15];
+console.log(rangeSum(p, 1, 3)); // 9
+
+Q3. Equilibrium Index
+-----------------------
+function equilibrium(arr) {
+  let total = arr.reduce((a,b) => a+b, 0);
+  let left = 0;
+  for (let i = 0; i < arr.length; i++) {
+    total -= arr[i];
+    if (left === total) return i;
+    left += arr[i];
+  }
+  return -1;
+}
+console.log(equilibrium([1,3,5,2,2])); // 2
+
+Q4. Count Subarrays with Given Sum
+------------------------------------
+function countSubarraysWithSum(arr, target) {
+  let map = {0:1}, sum = 0, count = 0;
+  for (let x of arr) {
+    sum += x;
+    count += (map[sum - target] || 0);
+    map[sum] = (map[sum] || 0) + 1;
+  }
+  return count;
+}
+console.log(countSubarraysWithSum([1,1,1], 2)); // 2
+
+Q5. Product of Array Except Self
+----------------------------------
+function productExceptSelf(arr) {
+  let n = arr.length, result = Array(n).fill(1);
+  let left = 1;
+  for (let i = 0; i < n; i++) { result[i] = left; left *= arr[i]; }
+  let right = 1;
+  for (let i = n-1; i >= 0; i--) { result[i] *= right; right *= arr[i]; }
+  return result;
+}
+console.log(productExceptSelf([1,2,3,4])); // [24,12,8,6]
+
+
+==========================================================
+SECTION 6: SORTING
+==========================================================
+
+Q1. Bubble Sort
+-----------------
+function bubbleSort(arr) {
+  let n = arr.length;
+  for (let i = 0; i < n-1; i++)
+    for (let j = 0; j < n-i-1; j++)
+      if (arr[j] > arr[j+1]) [arr[j],arr[j+1]] = [arr[j+1],arr[j]];
+  return arr;
+}
+console.log(bubbleSort([5,3,1,4,2])); // [1,2,3,4,5]
+
+Q2. Selection Sort
+--------------------
+function selectionSort(arr) {
+  let n = arr.length;
+  for (let i = 0; i < n-1; i++) {
+    let minIdx = i;
+    for (let j = i+1; j < n; j++)
+      if (arr[j] < arr[minIdx]) minIdx = j;
+    [arr[i], arr[minIdx]] = [arr[minIdx], arr[i]];
+  }
+  return arr;
+}
+console.log(selectionSort([5,3,1,4,2])); // [1,2,3,4,5]
+
+Q3. Insertion Sort
+--------------------
+function insertionSort(arr) {
+  for (let i = 1; i < arr.length; i++) {
+    let key = arr[i], j = i - 1;
+    while (j >= 0 && arr[j] > key) { arr[j+1] = arr[j]; j--; }
+    arr[j+1] = key;
+  }
+  return arr;
+}
+console.log(insertionSort([5,3,1,4,2])); // [1,2,3,4,5]
+
+Q4. Sort 0s, 1s, 2s (Dutch National Flag)
+-------------------------------------------
+function sort012(arr) {
+  let low=0, mid=0, high=arr.length-1;
+  while (mid <= high) {
+    if (arr[mid]===0) { [arr[low],arr[mid]]=[arr[mid],arr[low]]; low++; mid++; }
+    else if (arr[mid]===1) { mid++; }
+    else { [arr[mid],arr[high]]=[arr[high],arr[mid]]; high--; }
+  }
+  return arr;
+}
+console.log(sort012([2,0,1,2,0,1,1])); // [0,0,1,1,1,2,2]
+
+Q5. Merge Two Sorted Arrays
+-----------------------------
+function mergeSorted(a, b) {
+  let result = [], i = 0, j = 0;
+  while (i < a.length && j < b.length)
+    result.push(a[i] <= b[j] ? a[i++] : b[j++]);
+  return result.concat(a.slice(i)).concat(b.slice(j));
+}
+console.log(mergeSorted([1,3,5],[2,4,6])); // [1,2,3,4,5,6]
+
+
+==========================================================
+SECTION 7: KADANE'S ALGORITHM
+==========================================================
+
+Q1. Maximum Subarray Sum
+--------------------------
+function maxSubarraySum(arr) {
+  let maxSum = arr[0], current = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    current = Math.max(arr[i], current + arr[i]);
+    maxSum = Math.max(maxSum, current);
+  }
+  return maxSum;
+}
+console.log(maxSubarraySum([-2,1,-3,4,-1,2,1,-5,4])); // 6
+
+Q2. Print Subarray with Max Sum
+---------------------------------
+function printMaxSubarray(arr) {
+  let maxSum=arr[0], current=arr[0], start=0, end=0, tempStart=0;
+  for (let i=1; i<arr.length; i++) {
+    if (arr[i] > current+arr[i]) { current=arr[i]; tempStart=i; }
+    else current+=arr[i];
+    if (current > maxSum) { maxSum=current; start=tempStart; end=i; }
+  }
+  return arr.slice(start, end+1);
+}
+console.log(printMaxSubarray([-2,1,-3,4,-1,2,1,-5,4])); // [4,-1,2,1]
+
+Q3. Maximum Circular Subarray Sum
+-----------------------------------
+function maxCircularSum(arr) {
+  let totalSum = arr.reduce((a,b) => a+b, 0);
+  let maxKadane = maxSubarraySum(arr);
+  let minKadane = minSubarraySum(arr);
+  if (maxKadane < 0) return maxKadane;
+  return Math.max(maxKadane, totalSum - minKadane);
+}
+function minSubarraySum(arr) {
+  let minSum=arr[0], current=arr[0];
+  for (let i=1; i<arr.length; i++) {
+    current = Math.min(arr[i], current+arr[i]);
+    minSum = Math.min(minSum, current);
+  }
+  return minSum;
+}
+console.log(maxCircularSum([8,-1,3,-2,7])); // 18
+
+
+==========================================================
+SECTION 8: ADVANCED ARRAY PROBLEMS
+==========================================================
+
+Q1. Two Sum (unsorted - hashmap)
+----------------------------------
+function twoSum(arr, target) {
+  let map = {};
+  for (let i = 0; i < arr.length; i++) {
+    let comp = target - arr[i];
+    if (map[comp] !== undefined) return [map[comp], i];
+    map[arr[i]] = i;
+  }
+  return [];
+}
+console.log(twoSum([2,7,11,15], 9)); // [0,1]
+
+Q2. Majority Element (> n/2 times) - Boyer-Moore
+--------------------------------------------------
+function majorityElement(arr) {
+  let count = 0, candidate = null;
+  for (let x of arr) {
+    if (count === 0) candidate = x;
+    count += x === candidate ? 1 : -1;
+  }
+  return candidate;
+}
+console.log(majorityElement([3,2,3])); // 3
+
+Q3. Find Missing Number (1 to n)
+----------------------------------
+function missingNumber(arr) {
+  let n = arr.length + 1;
+  let expected = n * (n + 1) / 2;
+  return expected - arr.reduce((a,b) => a+b, 0);
+}
+console.log(missingNumber([1,2,4,5])); // 3
+
+Q4. Find Duplicate Element
+----------------------------
+function findDuplicate(arr) {
+  let seen = new Set();
+  for (let x of arr) {
+    if (seen.has(x)) return x;
+    seen.add(x);
+  }
+  return -1;
+}
+console.log(findDuplicate([1,3,4,2,2])); // 2
+
+Q5. Merge Overlapping Intervals
+---------------------------------
+function mergeIntervals(intervals) {
+  intervals.sort((a,b) => a[0]-b[0]);
+  let result = [intervals[0]];
+  for (let i=1; i<intervals.length; i++) {
+    let last = result[result.length-1];
+    if (intervals[i][0] <= last[1]) last[1] = Math.max(last[1], intervals[i][1]);
+    else result.push(intervals[i]);
+  }
+  return result;
+}
+console.log(mergeIntervals([[1,3],[2,6],[8,10]])); // [[1,6],[8,10]]
+
+Q6. Container With Most Water
+-------------------------------
+function maxWater(height) {
+  let l=0, r=height.length-1, max=0;
+  while (l<r) {
+    max = Math.max(max, Math.min(height[l],height[r])*(r-l));
+    height[l]<height[r] ? l++ : r--;
+  }
+  return max;
+}
+console.log(maxWater([1,8,6,2,5,4,8,3,7])); // 49
+
+Q7. Trapping Rain Water
+------------------------
+function trapRainWater(height) {
+  let l=0, r=height.length-1, maxL=0, maxR=0, water=0;
+  while (l<r) {
+    if (height[l]<height[r]) {
+      height[l]>=maxL ? maxL=height[l] : water+=maxL-height[l];
+      l++;
+    } else {
+      height[r]>=maxR ? maxR=height[r] : water+=maxR-height[r];
+      r--;
+    }
+  }
+  return water;
+}
+console.log(trapRainWater([0,1,0,2,1,0,1,3,2,1,2,1])); // 6
+
+
+==========================================================
+SECTION 9: MATRIX (2D ARRAY)
+==========================================================
+
+Q1. Traverse Matrix
+---------------------
+let matrix = [[1,2,3],[4,5,6],[7,8,9]];
+for (let i=0; i<matrix.length; i++)
+  for (let j=0; j<matrix[0].length; j++)
+    process.stdout.write(matrix[i][j] + ' ');
+// 1 2 3 4 5 6 7 8 9
+
+Q2. Spiral Order Traversal
+-----------------------------
+function spiralOrder(matrix) {
+  let result = [], top=0, bottom=matrix.length-1, left=0, right=matrix[0].length-1;
+  while (top<=bottom && left<=right) {
+    for (let i=left;i<=right;i++) result.push(matrix[top][i]); top++;
+    for (let i=top;i<=bottom;i++) result.push(matrix[i][right]); right--;
+    if (top<=bottom) { for (let i=right;i>=left;i--) result.push(matrix[bottom][i]); bottom--; }
+    if (left<=right) { for (let i=bottom;i>=top;i--) result.push(matrix[i][left]); left++; }
+  }
+  return result;
+}
+console.log(spiralOrder([[1,2,3],[4,5,6],[7,8,9]])); // [1,2,3,6,9,8,7,4,5]
+
+Q3. Transpose Matrix
+----------------------
+function transpose(matrix) {
+  let n=matrix.length;
+  for (let i=0;i<n;i++)
+    for (let j=i+1;j<n;j++)
+      [matrix[i][j],matrix[j][i]] = [matrix[j][i],matrix[i][j]];
+  return matrix;
+}
+console.log(transpose([[1,2,3],[4,5,6],[7,8,9]]));
+// [[1,4,7],[2,5,8],[3,6,9]]
+
+Q4. Rotate Matrix by 90 degrees
+---------------------------------
+function rotate90(matrix) {
+  transpose(matrix);
+  matrix.forEach(row => row.reverse());
+  return matrix;
+}
+console.log(rotate90([[1,2,3],[4,5,6],[7,8,9]]));
+// [[7,4,1],[8,5,2],[9,6,3]]
+
+Q5. Search in 2D Matrix (sorted rows & cols)
+----------------------------------------------
+function searchMatrix(matrix, target) {
+  let row=0, col=matrix[0].length-1;
+  while (row<matrix.length && col>=0) {
+    if (matrix[row][col]===target) return [row,col];
+    else if (matrix[row][col]>target) col--;
+    else row++;
+  }
+  return [-1,-1];
+}
+console.log(searchMatrix([[1,4,7],[2,5,8],[3,6,9]], 5)); // [1,1]
+
+
+==========================================================
+SECTION 10: HASHING (NEW TOPIC - ADDED)
+==========================================================
+
+Q1. Find All Duplicates
+------------------------
+function findAllDuplicates(arr) {
+  let seen = {}, dups = [];
+  for (let x of arr) {
+    seen[x] = (seen[x]||0) + 1;
+    if (seen[x]===2) dups.push(x);
+  }
+  return dups;
+}
+console.log(findAllDuplicates([4,3,2,7,8,2,3,1])); // [2,3]
+
+Q2. First Non-Repeating Element
+---------------------------------
+function firstNonRepeating(arr) {
+  let freq = {};
+  for (let x of arr) freq[x] = (freq[x]||0)+1;
+  for (let x of arr) if (freq[x]===1) return x;
+  return -1;
+}
+console.log(firstNonRepeating([2,3,4,2,3,5])); // 4
+
+Q3. Longest Consecutive Sequence
+----------------------------------
+function longestConsecutive(arr) {
+  let set = new Set(arr), maxLen = 0;
+  for (let x of set) {
+    if (!set.has(x-1)) {
+      let len = 1;
+      while (set.has(x+len)) len++;
+      maxLen = Math.max(maxLen, len);
+    }
+  }
+  return maxLen;
+}
+console.log(longestConsecutive([100,4,200,1,3,2])); // 4
+
+Q4. Subarray with Zero Sum
+----------------------------
+function hasZeroSumSubarray(arr) {
+  let set = new Set([0]), sum = 0;
+  for (let x of arr) {
+    sum += x;
+    if (set.has(sum)) return true;
+    set.add(sum);
+  }
+  return false;
+}
+console.log(hasZeroSumSubarray([4,2,-3,-1,0])); // true
+
+==========================================================
+SECTION 11: BIT MANIPULATION ON ARRAYS (NEW TOPIC - ADDED)
+==========================================================
+
+Q1. Find Single Number (every other appears twice)
+----------------------------------------------------
+function singleNumber(arr) {
+  return arr.reduce((xor, x) => xor ^ x, 0);
+}
+console.log(singleNumber([2,2,1])); // 1
+
+Q2. Find Two Non-Repeating Elements
+--------------------------------------
+function twoSingleNumbers(arr) {
+  let xor = arr.reduce((a,b) => a^b, 0);
+  let bit = xor & (-xor);
+  let x=0, y=0;
+  for (let n of arr) n & bit ? x^=n : y^=n;
+  return [x, y];
+}
+console.log(twoSingleNumbers([1,2,3,2,1,4])); // [3,4]
+
+==========================================================
+SECTION 12: RECURSION ON ARRAYS (NEW TOPIC - ADDED)
+==========================================================
+
+Q1. Sum of Array using Recursion
+----------------------------------
+function sumRecursive(arr, n) {
+  if (n <= 0) return 0;
+  return arr[n-1] + sumRecursive(arr, n-1);
+}
+console.log(sumRecursive([1,2,3,4,5], 5)); // 15
+
+Q2. Check Sorted using Recursion
+----------------------------------
+function isSorted(arr, n) {
+  if (n <= 1) return true;
+  return arr[n-1] >= arr[n-2] && isSorted(arr, n-1);
+}
+console.log(isSorted([1,2,3,4,5], 5)); // true
+
+Q3. Binary Search using Recursion
+-----------------------------------
+function binarySearchRec(arr, l, r, target) {
+  if (l > r) return -1;
+  let mid = Math.floor((l+r)/2);
+  if (arr[mid]===target) return mid;
+  if (arr[mid]<target) return binarySearchRec(arr,mid+1,r,target);
+  return binarySearchRec(arr,l,mid-1,target);
+}
+console.log(binarySearchRec([1,3,5,7,9],0,4,7)); // 3
+
+==========================================================
+SECTION 13: PRACTICE STRATEGY
+==========================================================
+
+Order to study:
+  1. Array Basics
+  2. Searching (Linear & Binary)
+  3. Two Pointer
+  4. Sliding Window
+  5. Prefix Sum
+  6. Sorting Algorithms
+  7. Kadane's Algorithm
+  8. Hashing
+  9. Recursion on Arrays
+  10. Bit Manipulation
+  11. Advanced Problems (Two Sum, Trapping Rain, etc.)
+  12. Matrix (2D Arrays)
+
+Tips:
+  - Solve each problem yourself FIRST before looking at solution
+  - After solving, optimize for O(n) time if possible
+  - Practice on LeetCode / GeeksForGeeks for each topic
+  - Retry problems after 3-4 days to test memory
+  - Understand WHY each approach works, not just HOW
+
